@@ -63,23 +63,18 @@ fn win_cmp(c1: &Cell, c2: &Cell, c3: &Cell) -> bool
 
 fn check_winner(grid: &[[Cell; 3]; 3]) -> &Cell
 {
-    for row in 0..3
+    // colummns & rows
+    for i in 0..3
     {
-        if win_cmp(&grid[row][0], &grid[row][1], &grid[row][2]) { return &grid[row][0]; }
-
+        if win_cmp(&grid[i][0], &grid[i][1], &grid[i][2]) { return &grid[i][0]; }
+        if win_cmp(&grid[0][i], &grid[1][i], &grid[2][i]) { return &grid[0][i]; }
     }
 
-    for col in 0..3
-    {
-        if win_cmp(&grid[0][col], &grid[1][col], &grid[2][col]) { return &grid[0][col]; }
-
-    }
-
+    // diagonal
     if win_cmp(&grid[0][0], &grid[1][1], &grid[2][2]) { return &grid[0][0]; }
     if win_cmp(&grid[0][2], &grid[1][1], &grid[2][0]) { return &grid[0][2]; }
     if win_cmp(&grid[2][0], &grid[1][1], &grid[0][2]) { return &grid[2][0]; }
     
-
     return &Cell::Empty;
 }
 
